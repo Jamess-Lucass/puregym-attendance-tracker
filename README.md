@@ -4,8 +4,9 @@ Polls the PureGym API for real-time gym occupancy and exports the data as OpenTe
 
 ## Architecture
 
-```
-collector  ──OTLP/gRPC──▶  Alloy  ──remote_write──▶  Prometheus  ◀──query──  Grafana
+```mermaid
+graph LR
+    collector -->|OTLP/gRPC| Alloy -->|remote_write| Prometheus -->|query| Grafana
 ```
 
 | Component | Role |
