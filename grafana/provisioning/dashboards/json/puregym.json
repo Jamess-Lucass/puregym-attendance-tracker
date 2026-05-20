@@ -172,16 +172,18 @@
       "options": {
         "calculate": false,
         "color": { "scheme": "Spectral", "mode": "scheme", "reverse": true },
-        "yAxis": { "axisPlacement": "left" },
+        "yAxis": { "axisPlacement": "hidden" },
         "cellGap": 1,
-        "tooltip": { "show": true, "yHistogram": false }
+        "tooltip": { "show": true, "yHistogram": false, "showColorScale": true }
       },
       "targets": [
         {
           "expr": "avg_over_time(puregym_gym_occupancy{gym_name=\"$gym\"}[1h])",
           "refId": "A",
           "format": "time_series",
-          "interval": "1h"
+          "interval": "1h",
+          "legendFormat": "{{gym_name}}",
+          "range": true
         }
       ]
     }
