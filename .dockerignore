@@ -1,0 +1,16 @@
+.env*
+.git
+.gitignore
+README.md
+Dockerfile
+docker-compose.yml
+ 
+# Other services' configs
+alloy/
+prometheus/
+grafana/
+ 
+# Local build artefacts
+bin/
+*.log
+ 

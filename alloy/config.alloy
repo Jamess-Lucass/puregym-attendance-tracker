@@ -1,0 +1,45 @@
+livedebugging {
+  enabled = true
+}
+
+otelcol.receiver.otlp "default" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+
+  output {
+    metrics = [otelcol.processor.batch.default.input]
+  }
+}
+
+otelcol.processor.batch "default" {
+  output {
+    metrics = [otelcol.exporter.prometheus.default.input]
+  }
+}
+
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.local.receiver]
+}
+
+// prometheus.relabel "default" {
+//   rule {
+//     action        = "labeldrop"
+//     regex         = "otel_scope_.*"
+//   }
+//   forward_to = [prometheus.remote_write.local.receiver]
+// }
+
+prometheus.remote_write "local" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
+}
+
+logging {
+  level  = "info"
+  format = "logfmt"
+}

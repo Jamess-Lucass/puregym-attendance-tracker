@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  # Prometheus scrapes itself for stack health visibility.
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Alloy exposes its own internals on :12345 — useful for debugging the pipeline.
+  - job_name: alloy
+    static_configs:
+      - targets: ["alloy:12345"]
